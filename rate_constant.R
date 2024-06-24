@@ -153,18 +153,22 @@ cor.test(rate_constant,Mco_avg, method = "pearson")
 
 rate_Mco <- ggplot() + 
   geom_point(aes(x = 10^(Mco), y = rate_constant), color = "blue", size =3.5) +
-  labs(x=bquote("Relative Abundance of"~italic("Methylococcaceae")), 
+  labs(x=bquote(atop("Relative Abundance of"~italic("Methylococcaceae"),"(Amplicon)")), 
        y = expression(paste("Rate Constant (k, h", r^-1, ")"))) + 
   annotation_custom(grid::textGrob(label = "P < 0.001",
-                                   x = unit(0.135, "npc"), y = unit(0.84, "npc"), 
+                                   x = unit(0.895, "npc"), y = unit(0.135, "npc"), 
                                    gp = gpar(color = "black", fontsize=11))) +
   annotation_custom(grid::textGrob(label = expression(R^2*" = 0.73"),
-                                   x = unit(0.134, "npc"), y = unit(0.90, "npc"), 
+                                   x = unit(0.894, "npc"), y = unit(0.205, "npc"), 
                                    gp = gpar(color = "black", fontsize=11))) +
+  annotation_custom(grid::textGrob(label = expression(bold("A")),
+                                   x = unit(0.055, "npc"), y = unit(0.96, "npc"), 
+                                   gp = gpar(color = "black", fontsize=17))) +
   scale_x_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) + 
   geom_smooth(aes(x = 10^(Mco), y = rate_constant), method = "lm", se=FALSE,
               color = "black", linewidth=0.5) +
-  guides(linetype = "none", color = "none") + theme_classic() + theme(axis.text = element_text(size=rel(1.3)))
+  guides(linetype = "none", color = "none") + theme_classic() + 
+  theme(axis.text = element_text(size=rel(1.3)))
 
 rate_Mco

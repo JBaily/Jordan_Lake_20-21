@@ -35,13 +35,6 @@ nov_21_ra <- subset(all_data_ra, Experiment == "NOV_21")
 
 time_zero_ra <- subset(all_data_ra, Time == 0)
 
-
-#Test 
-
-setwd("~/Lloyd Lab Dropbox/Jennifer Baily/AMOR/jordan_lake_paper/time_series/Proportion_only")
-test_prop <- read.csv(file = "16S_all_.csv")
-test_zero_prop <- subset(test_prop, Time == 0)
-
 ####################################################################
 
 #T0 correlations all look great. No R^2 less than 0.97.

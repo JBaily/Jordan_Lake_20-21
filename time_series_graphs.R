@@ -149,7 +149,7 @@ nov_21_methylo <- ggplot() + geom_point(data = nov_2021, aes(x = Time, y = Methy
         panel.background = element_rect(fill = "white", color = "white"), 
         axis.line.x.bottom = element_line(color="black"), axis.title.y = element_blank(),
         legend.key = element_rect(fill = "white", color = "white"),
-        axis.title.x = element_text(size = rel(1.2)),
+        axis.title.x = element_text(size = rel(1.2), color = "black"),
         title = element_text(color = "white")) 
 
 nov_21_methano <- ggplot() + geom_point(data = nov_2021, aes(x = Time, y = Methylococcaceae, color = "Methylococcaceae")) +
@@ -294,7 +294,7 @@ july_21_methylo <- ggplot() + geom_point(data = july_2021, aes(x = Time, y = Met
         panel.background = element_rect(fill = "white", color = "white"), 
         axis.line.x.bottom = element_line(color="black"), axis.title.y = element_blank(),
         legend.key = element_rect(fill = "white", color = "white"),
-        axis.title.x = element_text(size = rel(1.2)),
+        axis.title.x = element_text(size = rel(1.2), color = "black"),
         title = element_text(color = "white")) 
 
 july_21_methano <- ggplot() + geom_point(data = july_2021, aes(x = Time, y = Methylococcaceae, color = "Methylococcaceae")) +
