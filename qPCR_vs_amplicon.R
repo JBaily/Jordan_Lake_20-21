@@ -14,7 +14,6 @@ library(scales)
 
 T0_qPCR <- read.csv(file = "qPCR_JL.csv", header = TRUE)
 Oct_2020_qPCR <- read.csv(file = "Mco_time_series_relative.csv", header = TRUE)
-Oct_2020_Mcy <- read.csv(file = "Mcy_time_series_relative.csv", header = TRUE)
 
 ##################
 ## Amplicon Data ##
@@ -29,7 +28,6 @@ T0_16S_select <- T0_16S_select[-13,]
 T0_16S_select <- T0_16S_select[-1,]
 
 Mco <- log10(T0_16S_select$Methylococcaceae)
-Mcy <- log10(T0_16S_select$Methylocystaceae)
 
 oct_2020 <- subset(All_16S, Experiment == "OCT_2020")
 oct_2020 <- oct_2020[-1,]#remove B1T0
@@ -63,24 +61,28 @@ cor.test(T0_qPCR$Mco_Prop_Log10,Mco_subset,method="pearson",alternative = "two.s
 # p = 4.36e-06, df = 10, t = 8.9479, r = 0.9428514, r^2 = 0.89
 
 plot(T0_qPCR$Mco_Prop_Log10,Mco_subset)
-qPCR_vs_amplicon_Mco <- ggplot()+geom_point(aes(x=10^T0_qPCR$Mco_Prop_Log10,y=10^Mco_subset),color="blue",size = 3) +
+qPCR_vs_amplicon_Mco <- ggplot()+geom_point(aes(y=10^T0_qPCR$Mco_Prop_Log10,x=10^Mco_subset),color="blue",size = 4.5) +
   scale_x_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) + 
   scale_y_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) + 
   annotation_custom(grid::textGrob(label = "P < 0.001",
                                    x = unit(0.892, "npc"), y = unit(0.135, "npc"), 
-                                   gp = gpar(color = "black", fontsize=11))) +
+                                   gp = gpar(color = "black", fontsize=15))) +
   annotation_custom(grid::textGrob(label = expression(R^2*" = 0.89"),
-                                   x = unit(0.891, "npc"), y = unit(0.205, "npc"), 
-                                   gp = gpar(color = "black", fontsize=11))) +
+                                   x = unit(0.891, "npc"), y = unit(0.220, "npc"), 
+                                   gp = gpar(color = "black", fontsize=15))) +
   annotation_custom(grid::textGrob(label = expression(bold("C")),
                                    x = unit(0.055, "npc"), y = unit(0.96, "npc"), 
-                                   gp = gpar(color = "black", fontsize=17))) +
-  geom_smooth(aes(x = 10^T0_qPCR$Mco_Prop_Log10, y = 10^(Mco_subset)), method = "lm", se=FALSE,
+                                   gp = gpar(color = "black", fontsize=20))) +
+  geom_smooth(aes(y = 10^T0_qPCR$Mco_Prop_Log10, x = 10^(Mco_subset)), method = "lm", se=FALSE,
               color = "black", linewidth=0.4) +
-  labs(x = bquote(atop("qPCR Relative Abundance"," ")), y = "Amplicon Relative Abundance") + theme_classic() + 
-  theme(axis.text = element_text(size=rel(1.3)))
+  labs(x = expression(paste("    qPCR Relative Abundance\n          (pmoA gene copies\n/16S rRNA bacterial gene copies)")),
+       y = "Amplicon Relative Abundance") + theme_classic() + 
+  theme(axis.text = element_text(size=rel(1.6)),
+        axis.title.x.bottom =  element_text(vjust=-10),
+        axis.title = element_text(size=15),
+        plot.margin = margin(5.5, 5.5, 50, 5.5, "pt"))
 
 ###############
 # Time Series #
@@ -93,57 +95,6 @@ cor.test(Oct_2020_qPCR$Avg_Mco_rel_abund,Mco_oct_2020)
 cor.test(Oct_2020_qPCR$Avg_Mco_rel_abund[Oct_2020_qPCR$Time < 40],
          Mco_oct_2020[Oct_2020_qPCR$Time < 40])
 #t = 3.2748, df = 11, p-value = 0.007402, r = 0.0.7026011, r^2 = 0.49
-
-############
-## T0 Mcy ##
-############
-
-cor.test(T0_qPCR$Mcy_Prop_Log10,Mcy_subset,method="pearson",alternative = "two.sided")
-# t = 1.8647, df = 10, p-value = 0.0918, r = 0.5079395, r^2 = 0.26
-
-plot(T0_qPCR$Mcy_Prop_Log10,Mcy_subset)
-Mcy_T0_plot <- ggplot()+geom_point(aes(x=10^T0_qPCR$Mcy_Prop_Log10,y=10^Mcy_subset),color="green3",size = 3) +
-  scale_x_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
-                     labels = trans_format("log10", math_format(10^.x))) + 
-  scale_y_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
-                     labels = trans_format("log10", math_format(10^.x))) + 
-  annotation_custom(grid::textGrob(label = "P = 0.09",
-                                   x = unit(0.135, "npc"), y = unit(0.85, "npc"), 
-                                   gp = gpar(color = "black", fontsize=11))) +
-  annotation_custom(grid::textGrob(label = expression(R^2*" = 0.26"),
-                                   x = unit(0.134, "npc"), y = unit(0.91, "npc"), 
-                                   gp = gpar(color = "black", fontsize=11))) +
-  labs(x = "qPCR Relative Abundance", y = "Amplicon Relative Abundance") + theme_classic()
-
-
-cor.test(Oct_2020_Mcy$Avg_Mcy_rel_abund[Oct_2020_qPCR$Time < 40],Mcy_oct_2020[Oct_2020_qPCR$Time < 40])
-#t = 4.0152, df = 11, p-value = 0.002033, r = 0.7709911
-
-qPCR_plot_Mcy <- ggplot()+geom_point(aes(x=Oct_2020_Mcy$Time[Oct_2020_Mcy$Time < 40],
-                                         y=Oct_2020_Mcy$Avg_Mcy_rel_abund[Oct_2020_Mcy$Time < 40]),
-                                     color = "green3") +
-  geom_line(aes(x=Oct_2020_Mcy$Time[Oct_2020_Mcy$Time < 40],
-                y=Oct_2020_Mcy$Avg_Mcy_rel_abund[Oct_2020_Mcy$Time < 40],
-                linetype = as.character(Oct_2020_Mcy$Box[Oct_2020_Mcy$Time < 40])),
-            color = "green3") + theme_classic() +
-  labs(x="Time (Hours)", y = "   qPCR 
-  Relative Abundance") +
-  guides(linetype = guide_legend(title = "iBag Replicate No.")) 
-
-amplicon_plot_Mcy <- ggplot() + geom_point(aes(x=Oct_2020_Mcy$Time[Oct_2020_Mcy$Time < 40],
-                                               y=Mcy_oct_2020[Oct_2020_Mcy$Time < 40]),
-                                           color = "green3") +
-  geom_line(aes(x=Oct_2020_Mcy$Time[Oct_2020_Mcy$Time < 40],
-                y=Mcy_oct_2020[Oct_2020_Mcy$Time < 40],
-                linetype=as.character(Oct_2020_Mcy$Box[Oct_2020_Mcy$Time < 40])),
-            color = "green3") + theme_classic() +
-  labs(x="Time (Hours)", y = "   Amplicon 
-  Relative Abundance") +
-  guides(linetype = guide_legend(title = "iBag Replicate No."))
-
-Mcy_time_series <- grid.arrange(qPCR_plot_Mcy,amplicon_plot_Mcy)
-grid.arrange(Mcy_T0_plot,Mcy_time_series,nrow=1,ncol=2,widths=c(1,1.25))
-
 
 #######
 
@@ -188,7 +139,6 @@ cor.test(log10(Mco_abs_abund),T0_qPCR$Mco_Prop_Log10)
 ###################
 
 Mco_qPCR <- T0_qPCR$Mco_Prop_Log10
-Mcy_qPCR <- T0_qPCR$Mcy_Prop_Log10
 
 ###Mco###
 
@@ -209,44 +159,31 @@ cor.test(ch4,Mco_qPCR, alternative = "two.sided", method = "pearson")
 cor.test(temp,Mco_qPCR, alternative = "two.sided", method = "pearson")
 ## Negative  correlation - Pearson: r = -0.7933298, t = -4.1208, p-value = 0.002074
 
-###Mcy###
-
-# Oxygen 
-cor.test(o2,Mcy_qPCR, alternative = "two.sided", method = "pearson")
-# Negative correlation - Pearson: r = -0.867105, t = -5.5047, p-value = 0.0002601
-
-# Methane 
-
-cor.test(ch4,Mcy_qPCR, alternative = "two.sided", method = "pearson")
-## No correlation - Pearson: r = 0.02380658, t = 0.075304, and p-value = 0.9415
-
-# Temp
-cor.test(temp,Mcy_qPCR, alternative = "two.sided", method = "pearson")
-## Negative  correlation - Pearson: r = -0.6818777, t = -2.9479, p-value = 0.01459
 
 #################
 # Geochem plots #
 #################
 
 rate_Mco_qPCR <- ggplot() + 
-  geom_point(aes(x = 10^(Mco_qPCR), y = rate_constant_qPCR), color = "blue", size =3.5) +
+  geom_point(aes(x = 10^(Mco_qPCR), y = rate_constant_qPCR), color = "blue", size =4.5) +
   labs(x=bquote(atop("Relative Abundance of"~italic("Methylococcaceae"),"(qPCR)")), 
        y = expression(paste("Rate Constant (k, h", r^-1, ")"))) + 
   annotation_custom(grid::textGrob(label = "P < 0.001",
-                                   x = unit(0.895, "npc"), y = unit(0.135, "npc"), 
-                                   gp = gpar(color = "black", fontsize=11))) +
+                                   x = unit(0.892, "npc"), y = unit(0.135, "npc"), 
+                                   gp = gpar(color = "black", fontsize=15))) +
   annotation_custom(grid::textGrob(label = expression(R^2*" = 0.93"),
-                                   x = unit(0.894, "npc"), y = unit(0.205, "npc"), 
-                                   gp = gpar(color = "black", fontsize=11))) +
+                                   x = unit(0.891, "npc"), y = unit(0.215, "npc"), 
+                                   gp = gpar(color = "black", fontsize=15))) +
   annotation_custom(grid::textGrob(label = expression(bold("B")),
                                    x = unit(0.055, "npc"), y = unit(0.96, "npc"), 
-                                   gp = gpar(color = "black", fontsize=17))) +
+                                   gp = gpar(color = "black", fontsize=20))) +
   scale_x_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) + 
   geom_smooth(aes(x = 10^(Mco_qPCR), y = rate_constant_qPCR), method = "lm", se=FALSE,
               color = "black", linewidth=0.5) + ylim(0,0.465) +
   guides(linetype = "none", color = "none") + theme_classic() + 
-  theme(axis.text = element_text(size=rel(1.3)))
+  theme(axis.text = element_text(size=rel(1.6)),
+        axis.title = element_text(size=15))
 
 rate_Mco_qPCR
 

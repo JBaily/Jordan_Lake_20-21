@@ -565,9 +565,11 @@ grid.arrange(Mm_o2_plot_fall_limited,Mm_ch4_plot_fall_limited,
 ####################
 
 #main body of paper 
+tiff("Figure_4_r_output_180mm.tiff", units="px", width=2400, height=2150, res=300)
 grid.arrange(Mco_o2_plot_hl,Mco_ch4_plot_hl,
              Mp_o2_plot_hl,Mp_temp_plot_hl,
              nrow=2,ncol=2,widths=c(1.2,1))
+dev.off()
 
 #supplemental body of paper 
 grid.arrange(Mm_o2_plot_fall_limited,Mm_ch4_plot_fall_limited, Ma_temp_plot_hl,

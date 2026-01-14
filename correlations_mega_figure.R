@@ -39,6 +39,8 @@ season <- c("O","O","O","J","J","J","J","J","J","J","J","O","O","O","O","O")
 
 # Methylococcaceae #
 
+# Methylococcaceae #
+
 o2_Mco <- ggplot() + geom_point(size=2.3, aes(x=o2,y=10^(Mco)), col = "blue") + 
   scale_y_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) + 
@@ -46,19 +48,18 @@ o2_Mco <- ggplot() + geom_point(size=2.3, aes(x=o2,y=10^(Mco)), col = "blue") +
                                    x = unit(0.96, "npc"), y = unit(0.915, "npc"), 
                                    gp = gpar(color = "black", fontsize=17))) +
   annotation_custom(grid::textGrob(label = "P < 0.001",
-                                   x = unit(0.135, "npc"), y = unit(0.11, "npc"), 
-                                   gp = gpar(color = "black", fontsize=11))) +
+                                   x = unit(0.178, "npc"), y = unit(0.11, "npc"), 
+                                   gp = gpar(color = "black", fontsize=12))) +
   annotation_custom(grid::textGrob(label = expression(R^2*" = 0.69"),
-                                   x = unit(0.134, "npc"), y = unit(0.25, "npc"), 
-                                   gp = gpar(color = "black", fontsize=11))) +
+                                   x = unit(0.177, "npc"), y = unit(0.25, "npc"), 
+                                   gp = gpar(color = "black", fontsize=12))) +
   geom_smooth(aes(x = o2, y = 10^(Mco)), method = "lm", se=FALSE,
-              color = "black", linewidth=0.5) +
+              color = "black", linewidth=0.5) +xlim(c(60,300))+
   theme(axis.title.y = element_blank(), axis.line.y = element_line(color="black"),
         panel.background = element_rect(fill = "white", color = "white"), 
-        axis.line.x.bottom = element_line(color="black"),
-        text = element_text(family = "Calibri"),
-        axis.title.x = element_blank(), 
-        axis.text.x = element_text(color = "white"))
+        axis.line.x.bottom = element_line(color="black"), axis.title.x = element_blank(), 
+        axis.text.x = element_blank(),
+        axis.text.y = element_text(size = 12))
 
 
 # Methylomonadaceae #
@@ -68,64 +69,64 @@ o2_Mm <- ggplot() + geom_point(size=2.3, aes(x=o2,y=10^(Mm)), col = "purple4") +
                                    x = unit(0.96, "npc"), y = unit(0.915, "npc"), 
                                    gp = gpar(color = "black", fontsize=17))) +
   annotation_custom(grid::textGrob(label = "P = 0.017",
-                                   x = unit(0.135, "npc"), y = unit(0.11, "npc"), 
-                                   gp = gpar(color = "black", fontsize=11))) +
+                                   x = unit(0.178, "npc"), y = unit(0.11, "npc"), 
+                                   gp = gpar(color = "black", fontsize=12))) +
   annotation_custom(grid::textGrob(label = expression(R^2*" = 0.35"),
-                                   x = unit(0.134, "npc"), y = unit(0.25, "npc"), 
-                                   gp = gpar(color = "black", fontsize=11))) +
+                                   x = unit(0.177, "npc"), y = unit(0.25, "npc"), 
+                                   gp = gpar(color = "black", fontsize=12))) +
   scale_y_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) +
   geom_smooth(aes(x = o2, y = 10^(Mm)), method = "lm", se=FALSE,
-              color = "black", linewidth=0.5) + 
+              color = "black", linewidth=0.5) + xlim(c(60,300))+
   theme(axis.title.y = element_blank(), axis.line.y = element_line(color="black",),
         panel.background = element_rect(fill = "white", color = "white"), 
-        axis.line.x.bottom = element_line(color="black"), 
-        text = element_text(family = "Calibri"),axis.title.x = element_blank(), 
-        axis.text.x = element_text(color = "white"))
+        axis.line.x.bottom = element_line(color="black"), axis.title.x = element_blank(), 
+        axis.text.x = element_blank(),
+        axis.text.y = element_text(size = 12))
 
 # Methylocystaceae #
 
-o2_Mcy <- ggplot() + geom_point(size=2.3, aes(x=o2,y=10^Mcy), col = "green3",alpha = 0.4) + 
+o2_Mcy <- ggplot() + geom_point(size=2.3, aes(x=o2,y=10^Mcy), col = "green3", alpha = 0.7, shape = 1, stroke = 1) + 
   annotation_custom(grid::textGrob(label = expression(bold("G")),
                                    x = unit(0.96, "npc"), y = unit(0.915, "npc"), 
                                    gp = gpar(color = "black", fontsize=17))) +
   scale_y_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
-                     labels = trans_format("log10", math_format(10^.x))) + 
+                     labels = trans_format("log10", math_format(10^.x))) + xlim(c(60,300))+ 
   theme(axis.title.y = element_blank(), axis.line.y = element_line(color="black"),
         panel.background = element_rect(fill = "white", color = "white"), 
-        axis.line.x.bottom = element_line(color="black"), 
-        text = element_text(family = "Calibri"),axis.title.x = element_blank(), 
-        axis.text.x = element_text(color = "white"))
+        axis.line.x.bottom = element_line(color="black"), axis.title.x = element_blank(), 
+        axis.text.x = element_blank(),
+        axis.text.y = element_text(size=12))
 
 # Methylacidiphilaceae #
 
-o2_Ma <- ggplot() + geom_point(size=2.3, aes(x=o2,y=10^Ma), col = "hotpink1",alpha = 0.4) + 
+o2_Ma <- ggplot() + geom_point(size=2.3, aes(x=o2,y=10^Ma), col = "hotpink1",alpha = 0.7, shape = 1, stroke = 1) + 
   annotation_custom(grid::textGrob(label = expression(bold("M")),
                                    x = unit(0.96, "npc"), y = unit(0.915, "npc"), 
                                    gp = gpar(color = "black", fontsize=17))) +
   scale_y_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) + 
-  annotate("text",x = 285, y = 0.01, label= "X",color="white") +
+  annotate("text",x = 285, y = 0.01, label= "X",color="white") + xlim(c(60,300))+
   theme(axis.title.y = element_blank(), 
         axis.line.y = element_line(color="black"),
         panel.background = element_rect(fill = "white", color = "white"), 
         axis.line.x.bottom = element_line(color="black"), 
-        text = element_text(family = "Calibri"),
-        axis.title.x = element_blank())
+        axis.title.x = element_blank(),
+        axis.text = element_text(size=12))
 
 # Methylophilaceae # 
 
-o2_Mp <- ggplot() + geom_point(size=2.3, aes(x=o2,y=10^Mp), col = "orange",alpha = 0.4) + 
+o2_Mp <- ggplot() + geom_point(size=2.3, aes(x=o2,y=10^Mp), col = "orange",alpha = 0.7, shape = 1, stroke = 1) + 
   annotation_custom(grid::textGrob(label = expression(bold("J")),
                                    x = unit(0.96, "npc"), y = unit(0.915, "npc"), 
                                    gp = gpar(color = "black", fontsize=17))) +
   scale_y_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
-                     labels = trans_format("log10", math_format(10^.x))) + 
+                     labels = trans_format("log10", math_format(10^.x)),limits=c(0.0023,0.015)) + xlim(c(60,300))+
   theme(axis.title.y = element_blank(), axis.line.y = element_line(color="black"),
         panel.background = element_rect(fill = "white", color = "white"), 
-        text = element_text(family = "Calibri"),
         axis.line.x.bottom = element_line(color="black"), axis.title.x = element_blank(), 
-        axis.text.x = element_text(color = "white"))
+        axis.text.x = element_blank(),
+        axis.text.y = element_text(size=12))
 
 ##########################
 ## Methane Correlations ##
@@ -133,7 +134,8 @@ o2_Mp <- ggplot() + geom_point(size=2.3, aes(x=o2,y=10^Mp), col = "orange",alpha
 
 # Methylococcaceae #
 
-ch4_Mco <- ggplot() + geom_point(size=2.3, aes(x=ch4,y=10^Mco), col = "blue",alpha = 0.4) + theme_classic() + 
+ch4_Mco <- ggplot() + geom_point(size=2.3, aes(x=ch4,y=10^Mco), col = "blue",alpha = 0.7, shape = 1, stroke = 1) + 
+  theme_classic() + 
   scale_y_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) + 
   scale_x_continuous(limits = c(195,450)) +
@@ -142,13 +144,13 @@ ch4_Mco <- ggplot() + geom_point(size=2.3, aes(x=ch4,y=10^Mco), col = "blue",alp
                                    gp = gpar(color = "black", fontsize=17))) +
   theme(axis.title.y = element_blank(), axis.line.y = element_line(color="black",),
         panel.background = element_rect(fill = "white", color = "white"), 
-        text = element_text(family = "Calibri"),
         axis.line.x.bottom = element_line(color="black"), axis.title.x = element_blank(), 
-        axis.text = element_text(color = "white"))
+        axis.text = element_blank())
 
 # Methylomonadaceae #
 
-ch4_Mm <- ggplot() + geom_point(size=2.3, aes(x=ch4,y=10^Mm), col = "purple4",alpha = 0.4) + theme_classic() +   
+ch4_Mm <- ggplot() + geom_point(size=2.3, aes(x=ch4,y=10^Mm), col = "purple4",alpha = 0.7, shape = 1, stroke = 1) +
+  theme_classic() +   
   annotation_custom(grid::textGrob(label = expression(bold("E")),
                                    x = unit(0.96, "npc"), y = unit(0.915, "npc"), 
                                    gp = gpar(color = "black", fontsize=17))) +
@@ -157,54 +159,51 @@ ch4_Mm <- ggplot() + geom_point(size=2.3, aes(x=ch4,y=10^Mm), col = "purple4",al
   scale_x_continuous(limits = c(195,450)) +
   theme(axis.title.y = element_blank(), axis.line.y = element_line(color="black",),
         panel.background = element_rect(fill = "white", color = "white"), 
-        text = element_text(family = "Calibri"),
         axis.line.x.bottom = element_line(color="black"), axis.title.x = element_blank(), 
-        axis.text = element_text(color = "white"))
+        axis.text = element_blank())
 
 # Methylocystaceae #
 
-ch4_Mcy <- ggplot() + geom_point(size=2.3, aes(x=ch4,y=10^Mcy), col = "green3",alpha = 0.4) + 
+ch4_Mcy <- ggplot() + geom_point(size=2.3, aes(x=ch4,y=10^Mcy), col = "green3",alpha = 0.7, shape = 1, stroke = 1) + 
   scale_y_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
-                                          labels = trans_format("log10", math_format(10^.x))) + 
+                     labels = trans_format("log10", math_format(10^.x))) + 
   annotation_custom(grid::textGrob(label = expression(bold("H")),
                                    x = unit(0.96, "npc"), y = unit(0.915, "npc"), 
                                    gp = gpar(color = "black", fontsize=17))) +
   scale_x_continuous(limits = c(195,450)) + theme_classic() +   
   theme(axis.title.y = element_blank(), axis.line.y = element_line(color="black",),
         panel.background = element_rect(fill = "white", color = "white"), 
-        text = element_text(family = "Calibri"),
         axis.line.x.bottom = element_line(color="black"), axis.title.x = element_blank(), 
-        axis.text = element_text(color = "white"))
+        axis.text = element_blank())
 
 # Methylacidiphilaceae #
 
-ch4_Ma <- ggplot() + geom_point(size=2.3, aes(x=ch4,y=10^Ma), col = "hotpink1",alpha = 0.4) + 
+ch4_Ma <- ggplot() + geom_point(size=2.3, aes(x=ch4,y=10^Ma), col = "hotpink1",alpha = 0.7, shape = 1, stroke = 1) + 
   annotation_custom(grid::textGrob(label = expression(bold("N")),
                                    x = unit(0.96, "npc"), y = unit(0.915, "npc"), 
                                    gp = gpar(color = "black", fontsize=17))) +
   scale_y_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) + 
   scale_x_continuous(limits = c(195,450)) +
-  theme(axis.title.y = element_blank(), axis.line.y = element_line(color="black",),
+  theme(axis.title.y = element_blank(), axis.line.y = element_line(color="black"),
         panel.background = element_rect(fill = "white", color = "white"), 
-        text = element_text(family = "Calibri"),
         axis.line.x.bottom = element_line(color="black"), axis.title.x = element_blank(), 
-        axis.text.y = element_text(color = "white"))
+        axis.text.y = element_blank(),
+        axis.text.x = element_text(size=12))
 
 # Methylophilaceae # 
 
-ch4_Mp <- ggplot() + geom_point(size=2.3, aes(x=ch4,y=10^Mp), col = "orange",alpha = 0.4) + 
+ch4_Mp <- ggplot() + geom_point(size=2.3, aes(x=ch4,y=10^Mp), col = "orange",alpha = 0.7, shape = 1, stroke = 1) + 
   annotation_custom(grid::textGrob(label = expression(bold("K")),
                                    x = unit(0.96, "npc"), y = unit(0.915, "npc"), 
                                    gp = gpar(color = "black", fontsize=17))) +
   scale_y_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
-                     labels = trans_format("log10", math_format(10^.x))) + theme_classic() + 
+                     labels = trans_format("log10", math_format(10^.x)),limits=c(0.0023,0.015)) + theme_classic() + 
   scale_x_continuous(limits = c(195,450)) +
   theme(axis.title.y = element_blank(), axis.line.y = element_line(color="black",),
         panel.background = element_rect(fill = "white", color = "white"), 
-        text = element_text(family = "Calibri"),
         axis.line.x.bottom = element_line(color="black"), axis.title.x = element_blank(), 
-        axis.text = element_text(color = "white"))
+        axis.text = element_blank())
 
 ##############################
 ## Temperature Correlations ##
@@ -218,10 +217,10 @@ temp_Mco <- ggplot() + geom_point(size=2.3, aes(x=temp,y=10^Mco), col = "blue") 
                                    gp = gpar(color = "black", fontsize=17))) +
   annotation_custom(grid::textGrob(label = "P = 0.025",
                                    x = unit(0.178, "npc"), y = unit(0.11, "npc"), 
-                                   gp = gpar(color = "black", fontsize=11))) +
+                                   gp = gpar(color = "black", fontsize=12))) +
   annotation_custom(grid::textGrob(label = expression(R^2*" = 0.31"),
                                    x = unit(0.177, "npc"), y = unit(0.25, "npc"), 
-                                   gp = gpar(color = "black", fontsize=11))) +
+                                   gp = gpar(color = "black", fontsize=12))) +
   scale_y_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) + 
   scale_x_continuous(limits = c(18.2,29.2), breaks = c(18,20.75, 23.5,26.25,29)) +
@@ -229,14 +228,13 @@ temp_Mco <- ggplot() + geom_point(size=2.3, aes(x=temp,y=10^Mco), col = "blue") 
               color = "black", linewidth=0.5) + 
   theme(axis.title.y = element_blank(), axis.line.y = element_line(color="black",),
         panel.background = element_rect(fill = "white", color = "white"), 
-        text = element_text(family = "Calibri"),
         axis.line.x.bottom = element_line(color="black"), axis.title.x = element_blank(), 
-        axis.text = element_text(color = "white")) + 
+        axis.text = element_blank()) + 
   guides(linetype = "none", color = "none") 
 
 # Methylomonadaceae #
 
-temp_Mm <- ggplot() + geom_point(size=2.3, aes(x=temp,y=10^Mm), col = "purple4",alpha = 0.4) + 
+temp_Mm <- ggplot() + geom_point(size=2.3, aes(x=temp,y=10^Mm), col = "purple4",alpha = 0.7, shape = 1, stroke = 1) + 
   annotation_custom(grid::textGrob(label = expression(bold("F")),
                                    x = unit(0.96, "npc"), y = unit(0.915, "npc"), 
                                    gp = gpar(color = "black", fontsize=17))) +
@@ -245,9 +243,8 @@ temp_Mm <- ggplot() + geom_point(size=2.3, aes(x=temp,y=10^Mm), col = "purple4",
   scale_x_continuous(limits = c(18.2,29.2), breaks = c(18,20.75, 23.5,26.25,29)) +
   theme(axis.title.y = element_blank(), axis.line.y = element_line(color="black",),
         panel.background = element_rect(fill = "white", color = "white"), 
-        text = element_text(family = "Calibri"),
         axis.line.x.bottom = element_line(color="black"), axis.title.x = element_blank(), 
-        axis.text = element_text(color = "white")) + 
+        axis.text = element_blank()) + 
   guides(linetype = "none", color = "none") 
 
 # Methylocystaceae #
@@ -258,10 +255,10 @@ temp_Mcy <- ggplot() + geom_point(size=2.3, aes(x=temp,y=10^Mcy), col = "green3"
                                    gp = gpar(color = "black", fontsize=17))) +
   annotation_custom(grid::textGrob(label = "P < 0.001",
                                    x = unit(0.178, "npc"), y = unit(0.11, "npc"), 
-                                   gp = gpar(color = "black", fontsize=11))) +
+                                   gp = gpar(color = "black", fontsize=12))) +
   annotation_custom(grid::textGrob(label = expression(R^2*" = 0.84"),
                                    x = unit(0.177, "npc"), y = unit(0.25, "npc"), 
-                                   gp = gpar(color = "black", fontsize=11))) +
+                                   gp = gpar(color = "black", fontsize=12))) +
   scale_y_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) + 
   scale_x_continuous(limits = c(18.2,29.2), breaks = c(18,20.75, 23.5,26.25,29)) +
@@ -269,9 +266,8 @@ temp_Mcy <- ggplot() + geom_point(size=2.3, aes(x=temp,y=10^Mcy), col = "green3"
               color = "black", linewidth=0.5) + 
   theme(axis.title.y = element_blank(), axis.line.y = element_line(color="black",),
         panel.background = element_rect(fill = "white", color = "white"), 
-        text = element_text(family = "Calibri"),
         axis.line.x.bottom = element_line(color="black"), axis.title.x = element_blank(), 
-        axis.text = element_text(color = "white")) + 
+        axis.text = element_blank()) + 
   guides(linetype = "none", color = "none") 
 
 # Methylacidiphilaceae # 
@@ -282,36 +278,34 @@ temp_Ma <- ggplot() + geom_point(size=2.3, aes(x=temp,y=10^Ma), col = "hotpink1"
                                    gp = gpar(color = "black", fontsize=17))) +
   annotation_custom(grid::textGrob(label = "P < 0.001",
                                    x = unit(0.178, "npc"), y = unit(0.73, "npc"), 
-                                   gp = gpar(color = "black", fontsize=11))) +
+                                   gp = gpar(color = "black", fontsize=12))) +
   annotation_custom(grid::textGrob(label = expression(R^2*" = 0.81"),
                                    x = unit(0.177, "npc"), y = unit(0.88, "npc"), 
-                                   gp = gpar(color = "black", fontsize=11))) +
+                                   gp = gpar(color = "black", fontsize=12))) +
   scale_y_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) + 
   geom_smooth(aes(x = temp, y = 10^(Ma)), method = "lm", se=FALSE,
               color = "black", linewidth=0.5) + 
   scale_x_continuous(limits = c(18.2,29.2), breaks = c(18,20.75, 23.5,26.25,29)) +
   theme(axis.title.y = element_blank(), axis.line.y = element_line(color="black",),
-        panel.background = element_rect(fill = "white", color = "white"),
-        text = element_text(family = "Calibri"),
+        panel.background = element_rect(fill = "white", color = "white"), 
         axis.line.x.bottom = element_line(color="black"), axis.title.x = element_blank(), 
-        axis.text.y = element_text(color = "white"))
+        axis.text.y = element_blank(),axis.text.x = element_text(size=12))
 
 # Methylophilaceae #
 
-temp_Mp <- ggplot() + geom_point(size=2.3, aes(x=temp,y=10^Mp), col = "orange",alpha = 0.4) + 
+temp_Mp <- ggplot() + geom_point(size=2.3, aes(x=temp,y=10^Mp), col = "orange",alpha = 0.7, shape = 1, stroke = 1) + 
   annotation_custom(grid::textGrob(label = expression(bold("L")),
                                    x = unit(0.96, "npc"), y = unit(0.915, "npc"), 
                                    gp = gpar(color = "black", fontsize=17))) +
   scale_y_continuous(trans = "log10", 
                      breaks = trans_breaks("log10", function(x) 10^x),
-                     labels = trans_format("log10", math_format(10^.x))) + 
+                     labels = trans_format("log10", math_format(10^.x)),limits=c(0.0023,0.015)) + 
   scale_x_continuous(limits = c(18.2,29.2), breaks = c(18,20.75, 23.5,26.25,29)) +
   theme(axis.title.y = element_blank(), axis.line.y = element_line(color="black"),
         panel.background = element_rect(fill = "white", color = "white"), 
-        text = element_text(family = "Calibri"),
         axis.line.x.bottom = element_line(color="black"), axis.title.x = element_blank(), 
-        axis.text = element_text(color = "white")) 
+        axis.text = element_blank()) 
 
 #############
 ## Legends ##
@@ -341,14 +335,15 @@ methano_legend <- cowplot::get_legend(ggplot() + theme_classic() +
                                               text = element_text(family = "Calibri"),
                                               legend.title = element_text(size = rel(1.1)))) 
 
-opacity_legend <- cowplot::get_legend(opacity_graph <- ggplot() + geom_point(aes(x = c(2,3,4), y = c(1,2,3), alpha = "1"),color="purple4",size=3.1) + 
-                                        geom_point(aes(x = c(2,3,4), y = c(3,4,5), alpha = "0.3"),color="black",size=3.1) + theme_classic() +
-                                        scale_alpha_manual(values = c(1,0.3),breaks = c("1","0.3"),labels = c("P < 0.05", "P = N.S.")) +
-                                        guides(alpha = guide_legend(title = bquote(bold("Significance")))) +
+
+opacity_legend <- cowplot::get_legend(opacity_graph <- ggplot() + geom_point(aes(x = c(2,3,4), y = c(1,2,3),shape = "21"),stroke = 1,
+                                                                             color="black",fill = "black",size=2.2) + theme_classic() +
+                                        geom_point(aes(x = c(2,3,4), y = c(3,4,5), shape = "1"),color="black",size=2.2,stroke = 1) + 
+                                        scale_shape_manual(values = c(21,1),breaks=c("21","1"),labels = c("P < 0.05", "P = N.S.")) +
+                                        guides(shape = guide_legend(title = bquote(bold("Significance")))) +
                                         theme(panel.background = element_rect(fill = "white", color = "white"),
-                                              legend.text = element_text(size = rel(1.0)),
-                                              text = element_text(family = "Calibri"),
-                                              legend.title = element_text(size = rel(1.1))))
+                                              legend.text = element_text(size = rel(1.1)), legend.title = element_text(size = rel(1.2)),
+                                              text = element_text(family = "Calibri")))
 
 
 legends.all <- grid.arrange(methano_legend,methylo_legend,opacity_legend,ncol=1,nrow=3)
@@ -359,22 +354,24 @@ legends.all <- grid.arrange(methano_legend,methylo_legend,opacity_legend,ncol=1,
 
 library(extrafont)
 font_import(pattern="[A/a]rial", prompt=FALSE)
+
 grid.arrange(o2_Mco, ch4_Mco, temp_Mco,
              o2_Mm, ch4_Mm, temp_Mm,
              o2_Mcy, ch4_Mcy, temp_Mcy,
              o2_Mp, ch4_Mp, temp_Mp,
              o2_Ma, ch4_Ma, temp_Ma,
              nrow = 5, ncol = 3)
+
 corr_w_xaxis <- grid.arrange(o2_Mco, ch4_Mco, temp_Mco,
                              o2_Mm, ch4_Mm, temp_Mm,
                              o2_Mcy, ch4_Mcy, temp_Mcy,
                              o2_Mp, ch4_Mp, temp_Mp,
                              o2_Ma, ch4_Ma, temp_Ma,
-                             nrow = 5, ncol = 3, 
-                             bottom = textGrob(gp=gpar(fontsize = 15),
-                                               expression(" O"[2] ~ "(" *mu*"M)"
-                                                          ~~"CH"[4]~"(nM)"
-                                                          ~~"Temperature "~( degree*C)~" ")))
+                             nrow = 5, ncol = 3, heights = c(1,1,1,1,1.1),widths = c(1.1,1,1),
+                             bottom = textGrob(gp=gpar(fontsize = 16.5),
+                                               expression("     "~~~~~~"O"[2] ~ "(" *mu*"M)"
+                                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"CH"[4]~"(nM)"
+                                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"Temperature "~( degree*C)~"   ")))
 
 
 

@@ -78,10 +78,9 @@ abund_plot <- ggplot(abundances, aes(x=groups, y=10^(abund)), color = black) + #
   scale_y_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x)),
                      limits = 10^c(-4.1,-1)) +
-  geom_jitter(size=1, shape=21, alpha=1, aes(fill=groups),position = position_jitter(0.25)) + #alpha is 0.5 for most versions
-  #geom_jitter(size=1, pch=21, alpha=1, aes(color=groups),position = position_jitter(0.25)) +
+  geom_jitter(size=1, shape=21, alpha=1, aes(fill=groups),position = position_jitter(0.25)) + 
   geom_text(data = letters_tukey, aes(x = Groups, y = Placement.Value, label = Letter), 
-            size = 4, color = "black", vjust = c(-3.2,-4,-6,-9.6,-6.7)) +
+            size = 4, color = "black", vjust = c(-4.2,-5,-7,-10.6,-7.7)) +
   scale_color_manual(values = c("hotpink1","orange","green","blue","purple4"),
                      breaks = c("Methylacidiphilaceae","Methylophilaceae",
                                 "Methylocystaceae","Methylococcaceae",
@@ -90,7 +89,8 @@ abund_plot <- ggplot(abundances, aes(x=groups, y=10^(abund)), color = black) + #
                      breaks = c("Methylacidiphilaceae","Methylophilaceae",
                                 "Methylocystaceae","Methylococcaceae",
                                 "Methylomonadaceae")) + 
-  theme_classic() + theme(axis.text.x.bottom = element_text(face = "italic"))
+  theme_classic() + theme(axis.text.x.bottom = element_text(face = "italic",angle=50,hjust=1,size=10),
+                          axis.title = element_text(face="bold",size = 12))
 
 abund_plot
 

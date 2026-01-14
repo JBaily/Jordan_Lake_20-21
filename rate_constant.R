@@ -141,6 +141,36 @@ cor.test(rate_constant,Mco_avg, method = "pearson")
 # r = 0.68261, t = 3.495, p-value = 0.00357 -- ** 
 
 
+## Initial Methane Oxidation Rate #
+
+#Regular 
+cor.test(rate_constant*geochem$Modeled_Initial_Methane,Ma, method = "pearson") 
+# r = -0.6801416, t = -3.4715, p-value = 0.003742 # -- *
+cor.test(rate_constant*geochem$Modeled_Initial_Methane,Mp, method = "pearson") 
+# r = 0.4137409, t = 1.7004, p-value = 0.1111 # -- NS
+cor.test(rate_constant*geochem$Modeled_Initial_Methane,Mcy, method = "pearson")
+# r = 0.7363884, t = 4.0725, p-value = 0.001142 -- **
+cor.test(rate_constant*geochem$Modeled_Initial_Methane,Mm, method = "pearson")
+# r = 0.4891379, t = 2.0983, p-value = 0.0545 -- N.S.
+# 0.31
+cor.test(rate_constant*geochem$Modeled_Initial_Methane,Mco, method = "pearson") # -- *****
+# r = 0.8089661, t = 5.149, p-value = 0.0001478
+
+
+
+#Average
+cor.test(rate_constant*geochem$Modeled_Initial_Methane,Ma_avg, method = "pearson") 
+# r = -0.5276642, t = -2.3242, p-value = 0.03567 # -- *
+cor.test(rate_constant*geochem$Modeled_Initial_Methane,Mp_avg, method = "pearson") 
+# r = 0.204627, t = 0.7822, p-value = 0.4471 # -- NS
+cor.test(rate_constant*geochem$Modeled_Initial_Methane,Mcy_avg, method = "pearson")
+# r = 0.7857345, t = 4.7529, p-value = 0.0003088 -- **
+cor.test(rate_constant*geochem$Modeled_Initial_Methane,Mm_avg, method = "pearson")
+# r = 0.5054273, t = 2.1917, p-value = 0.04581 -- *
+cor.test(rate_constant*geochem$Modeled_Initial_Methane,Mco_avg, method = "pearson") 
+# r = 0.574624, t = 2.6271, p-value = 0.0199 -- ** 
+
+
 ###########
 # Results #
 ###########
@@ -152,23 +182,24 @@ cor.test(rate_constant,Mco_avg, method = "pearson")
 ###########
 
 rate_Mco <- ggplot() + 
-  geom_point(aes(x = 10^(Mco), y = rate_constant), color = "blue", size =3.5) +
+  geom_point(aes(x = 10^(Mco), y = rate_constant), color = "blue", size =4.5) +
   labs(x=bquote(atop("Relative Abundance of"~italic("Methylococcaceae"),"(Amplicon)")), 
        y = expression(paste("Rate Constant (k, h", r^-1, ")"))) + 
   annotation_custom(grid::textGrob(label = "P < 0.001",
                                    x = unit(0.895, "npc"), y = unit(0.135, "npc"), 
-                                   gp = gpar(color = "black", fontsize=11))) +
+                                   gp = gpar(color = "black", fontsize=15))) +
   annotation_custom(grid::textGrob(label = expression(R^2*" = 0.73"),
-                                   x = unit(0.894, "npc"), y = unit(0.205, "npc"), 
-                                   gp = gpar(color = "black", fontsize=11))) +
+                                   x = unit(0.894, "npc"), y = unit(0.215, "npc"), 
+                                   gp = gpar(color = "black", fontsize=15))) +
   annotation_custom(grid::textGrob(label = expression(bold("A")),
                                    x = unit(0.055, "npc"), y = unit(0.96, "npc"), 
-                                   gp = gpar(color = "black", fontsize=17))) +
+                                   gp = gpar(color = "black", fontsize=20))) +
   scale_x_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) + 
   geom_smooth(aes(x = 10^(Mco), y = rate_constant), method = "lm", se=FALSE,
               color = "black", linewidth=0.5) +
   guides(linetype = "none", color = "none") + theme_classic() + 
-  theme(axis.text = element_text(size=rel(1.3)))
+  theme(axis.text = element_text(size=rel(1.6)),
+        axis.title = element_text(size=15))
 
 rate_Mco

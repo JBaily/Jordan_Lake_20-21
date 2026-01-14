@@ -46,6 +46,11 @@ SAMPLE_table <- sample_data(SAMPLE)
 ############################
 
 ps <- phyloseq(OTU_table, SAMPLE_table, TAXA_table)
+ps_gen <- tax_glom(ps, taxrank = "Genus", NArm =FALSE)
+ps_fam <- tax_glom(ps, taxrank = "Family", NArm =FALSE)
+
+ps.prop.gen <- transform_sample_counts(ps_gen, function(x){x / sum(x)}) #Use in 'JL_rate_all.R'
+ps.prop.fam <- transform_sample_counts(ps_fam, function(x){x / sum(x)}) #Use in 'JL_rate_all.R'
 
 ############################
 #   Subset Samples by Exp  #

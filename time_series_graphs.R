@@ -17,8 +17,6 @@ all_data <- read.csv(file = "16S_all.csv")
 all_data$Box <- as.character(all_data$Box)
 
 oct_2020 <- subset(all_data, Experiment == "OCT_2020")
-oct_2020 <- oct_2020[-1,] #remove B1T0
-oct_2020 <- oct_2020[-1,] #remove B1T1
 june_1_21 <- subset(all_data, Experiment == "JL1")
 june_2_21 <- subset(all_data, Experiment == "JL2")
 july_2021 <- subset(all_data, Experiment == "JL3")
@@ -45,7 +43,8 @@ oct_20_methylo <- ggplot() + geom_point(data = oct_2020, aes(x = Time, y = Methy
         axis.line.x.bottom = element_line(color="black"), 
         axis.title.x = element_text(color = "white",size = rel(1.2)), 
         legend.key = element_rect(fill = "white", color = "white"),
-        title = element_text(color = "white")) + 
+        title = element_text(color = "white"),
+        axis.text = element_text(size=11)) + 
   guides(linetype = "none", color = "none") 
 
 
@@ -68,11 +67,12 @@ oct_20_methano <- ggplot() + geom_point(data = oct_2020, aes(x = Time, y = Methy
         panel.background = element_rect(fill = "white", color = "white"), 
         axis.line.x.bottom = element_line(color="black"), 
         legend.key = element_rect(fill = "white", color = "white"),
-        axis.title.y = element_text(size = rel(1.2)))
+        axis.title.y = element_text(size = rel(1.2)),
+        axis.text = element_text(size=11))
 
-#################
-## Allyl 2021  ##
-#################
+###################
+## October 2021  ##
+###################
 
 oct_21_methylo <- ggplot() + geom_point(data = oct_2021, aes(x = Time, y = Methylacidiphilaceae, color="Methylacidiphilaceae")) +
   geom_line(data = oct_2021, aes(x = Time, y = Methylacidiphilaceae, linetype = Box, color="Methylacidiphilaceae")) + 
@@ -96,7 +96,8 @@ oct_21_methylo <- ggplot() + geom_point(data = oct_2021, aes(x = Time, y = Methy
         panel.background = element_rect(fill = "white", color = "white"), 
         axis.line.x.bottom = element_line(color="black"), axis.title.y = element_blank(), 
         legend.key = element_rect(fill = "white", color = "white"),
-        title = element_text(color = "white")) 
+        title = element_text(color = "white"),
+        axis.text = element_text(size=11)) 
 
 
 oct_21_methano <- ggplot() + geom_point(data = oct_2021, aes(x = Time, y = Methylococcaceae, color = "Methylococcaceae")) +
@@ -124,11 +125,13 @@ oct_21_methano <- ggplot() + geom_point(data = oct_2021, aes(x = Time, y = Methy
         panel.background = element_rect(fill = "white", color = "white"), 
         axis.line.x.bottom = element_line(color="black"), 
         legend.key = element_rect(fill = "white", color = "white"),
-        axis.title.y = element_text(size = rel(1.2))) 
+        axis.title.y = element_text(size = rel(1.2)),
+        axis.text = element_text(size=11)) 
 
-##################
-## AlMeOH 2021  ##
-##################
+
+####################
+## November 2021  ##
+####################
 
 nov_21_methylo <- ggplot() + geom_point(data = nov_2021, aes(x = Time, y = Methylacidiphilaceae, color="Methylacidiphilaceae")) +
   geom_line(data = nov_2021, aes(x = Time, y = Methylacidiphilaceae, linetype = Box, color="Methylacidiphilaceae")) + 
@@ -139,8 +142,8 @@ nov_21_methylo <- ggplot() + geom_point(data = nov_2021, aes(x = Time, y = Methy
        title = expression(bold("November 2021"))) +
   scale_color_manual(breaks = c("Methylophilaceae", "Methylacidiphilaceae"), values = c("orange","hotpink1"))  +
   annotation_custom(grid::textGrob(label = expression(bold("F")),
-                                      x = unit(0.94, "npc"), y = unit(0.95, "npc"), 
-                                      gp = gpar(color = "black", fontsize=17))) + 
+                                   x = unit(0.94, "npc"), y = unit(0.95, "npc"), 
+                                   gp = gpar(color = "black", fontsize=17))) + 
   scale_x_continuous(limits=c(0,18.5)) +
   geom_segment(aes(x = 0.225, y = 0.018, xend = 0.275, yend = 0.0165), color="black",                                                                                       
                arrow = arrow(angle = 18, length = unit(0.15, "cm"))) + 
@@ -150,7 +153,8 @@ nov_21_methylo <- ggplot() + geom_point(data = nov_2021, aes(x = Time, y = Methy
         axis.line.x.bottom = element_line(color="black"), axis.title.y = element_blank(),
         legend.key = element_rect(fill = "white", color = "white"),
         axis.title.x = element_text(size = rel(1.2), color = "black"),
-        title = element_text(color = "white")) 
+        title = element_text(color = "white"),
+        axis.text = element_text(size=11)) 
 
 nov_21_methano <- ggplot() + geom_point(data = nov_2021, aes(x = Time, y = Methylococcaceae, color = "Methylococcaceae")) +
   geom_line(data = nov_2021, aes(x = Time, y = Methylococcaceae, linetype=Box, color = "Methylococcaceae")) + 
@@ -169,13 +173,9 @@ nov_21_methano <- ggplot() + geom_point(data = nov_2021, aes(x = Time, y = Methy
   scale_x_continuous(limits=c(0,18.5)) +
   geom_segment(aes(x = 0.225, y = 0.0132, xend = 0.275, yend = 0.012), color="black",                                                                                       
                arrow = arrow(angle = 18, length = unit(0.15, "cm")))+
-  scale_linetype_manual(breaks = c("1","2","3"), values=c(3,1,2)) +
-  theme(axis.line.y = element_line(color="black",),
-        panel.background = element_rect(fill = "white", color = "white"), 
-        axis.line.x.bottom = element_line(color="black"),
-        legend.key = element_rect(fill = "white", color = "white"),
-        axis.title.x = element_text(size = rel(1.2)),
-        axis.title.y = element_text(size = rel(1.2))) 
+  scale_linetype_manual(breaks = c("1","2","3"), values=c(3,1,2)) + theme_classic() + 
+  theme(axis.title.x = element_text(size = rel(1.2)), axis.title.y = element_text(size = rel(1.2)),
+        axis.text = element_text(size=11)) 
 
 
 ##################
@@ -199,7 +199,8 @@ june_1_methylo <- ggplot() + geom_point(data = june_1_21, aes(x = Time, y = Meth
         panel.background = element_rect(fill = "white", color = "white"), 
         axis.line.x.bottom = element_line(color="black"), axis.title.y = element_blank(), 
         legend.key = element_rect(fill = "white", color = "white"),
-        title = element_text(color = "white")) 
+        title = element_text(color = "white"),
+        axis.text = element_text(size=11)) 
 
 
 june_1_methano <- ggplot() + geom_point(data = june_1_21, aes(x = Time, y = Methylococcaceae, color = "Methylococcaceae")) +
@@ -221,7 +222,8 @@ june_1_methano <- ggplot() + geom_point(data = june_1_21, aes(x = Time, y = Meth
         panel.background = element_rect(fill = "white", color = "white"), 
         axis.line.x.bottom = element_line(color="black"), 
         legend.key = element_rect(fill = "white", color = "white"),
-        axis.title.y = element_text(size = rel(1.2))) 
+        axis.title.y = element_text(size = rel(1.2)),
+        axis.text = element_text(size=11)) 
 
 
 ##################
@@ -248,8 +250,8 @@ june_2_methylo <- ggplot() + geom_point(data = june_2_21, aes(x = Time, y = Meth
         panel.background = element_rect(fill = "white", color = "white"), 
         axis.line.x.bottom = element_line(color="black"), axis.title.y = element_blank(), 
         legend.key = element_rect(fill = "white", color = "white"),
-        title = element_text(color = "white")) 
-
+        title = element_text(color = "white"),
+        axis.text = element_text(size=11))
 
 june_2_methano <- ggplot() + geom_point(data = june_2_21, aes(x = Time, y = Methylococcaceae, color = "Methylococcaceae")) +
   geom_line(data = june_2_21, aes(x = Time, y = Methylococcaceae, linetype=Box, color = "Methylococcaceae")) + 
@@ -272,7 +274,7 @@ june_2_methano <- ggplot() + geom_point(data = june_2_21, aes(x = Time, y = Meth
         axis.line.x.bottom = element_line(color="black"), 
         legend.key = element_rect(fill = "white", color = "white"),
         axis.title.y = element_text(size = rel(1.2)),
-        axis.text.y.left = element_text(size=7.2)) 
+        axis.text = element_text(size=11)) 
 
 ###############
 ## July 2021  ##
@@ -295,7 +297,8 @@ july_21_methylo <- ggplot() + geom_point(data = july_2021, aes(x = Time, y = Met
         axis.line.x.bottom = element_line(color="black"), axis.title.y = element_blank(),
         legend.key = element_rect(fill = "white", color = "white"),
         axis.title.x = element_text(size = rel(1.2), color = "black"),
-        title = element_text(color = "white")) 
+        title = element_text(color = "white"),
+        axis.text = element_text(size=11)) 
 
 july_21_methano <- ggplot() + geom_point(data = july_2021, aes(x = Time, y = Methylococcaceae, color = "Methylococcaceae")) +
   geom_line(data = july_2021, aes(x = Time, y = Methylococcaceae, color = "Methylococcaceae",linetype=Box)) + 
@@ -306,14 +309,14 @@ july_21_methano <- ggplot() + geom_point(data = july_2021, aes(x = Time, y = Met
   labs(x="Time (Hours)", y="Relative Abundance", col = "Family", linetype = "Incubation Device",
        title = expression(bold("July 2021")))+
   scale_color_manual(breaks = c("Methylomonadaceae", "Methylococcaceae", "Methylocystaceae"), values = c("purple4","blue","green3")) +
-  scale_linetype_manual(breaks = c("1","2","3"), values=c(3,1,2)) +
   annotation_custom(grid::textGrob(label = expression(bold("E")),
                                    x = unit(0.94, "npc"), y = unit(0.95, "npc"), 
                                    gp = gpar(color = "black", fontsize=17))) +
   guides(linetype = "none", color = "none") + geom_vline(xintercept = 25.6) +
-  scale_x_continuous(limits=c(0,50)) + theme_classic() + 
-  theme(axis.title.x = element_text(size = rel(1.2)), axis.title.y = element_text(size = rel(1.2)))
-
+  scale_x_continuous(limits=c(0,50)) + 
+  scale_linetype_manual(breaks = c("1","2","3"), values=c(3,1,2)) +theme_classic() + 
+  theme(axis.title.x = element_text(size = rel(1.2)), axis.title.y = element_text(size = rel(1.2)),
+        axis.text = element_text(size=11)) 
 
 ###########
 # Legends #
