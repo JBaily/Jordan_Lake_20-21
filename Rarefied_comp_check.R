@@ -7,7 +7,7 @@ library(ggplot2)
 # Regular Proportion Data #
 ###########################
 
-all_data_prop <- read.csv(file = "Data/16S_all.csv")
+all_data_prop <- read.csv(file = "16S_all.csv")
 all_data_prop$Box <- as.character(all_data_prop$Box)
 
 oct_2020_prop <- subset(all_data_prop, Experiment == "OCT_2020")
@@ -23,7 +23,7 @@ time_zero_prop <- subset(all_data_prop, Time == 0)
 # Rarefied Proportion Data #
 ############################
 
-all_data_ra <- read.csv(file = "Data/16S_all_ra.csv")
+all_data_ra <- read.csv(file = "16S_all_ra.csv")
 all_data_ra$Box <- as.character(all_data_ra$Box)
 
 oct_2020_ra <- subset(all_data_ra, Experiment == "OCT_2020")
