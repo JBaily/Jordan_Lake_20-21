@@ -32,7 +32,7 @@ oct_20_methylo <- ggplot() + geom_point(data = oct_2020, aes(x = Time, y = Methy
   geom_point(data = oct_2020, aes(x = Time, y = Methylophilaceae, color="Methylophilaceae")) +
   geom_line(data = oct_2020, aes(x = Time, y = Methylophilaceae, linetype=Box, color="Methylophilaceae")) +
   labs(x="Time (Hours)", col = "Family", linetype = "Incubation Device",
-       title = expression(bold("October 2020"))) +
+       title = expression(bold("October 2020"))) + 
   scale_linetype_manual(breaks = c("1","2","3"), values=c(3,1,2)) + geom_vline(xintercept = 13.6) +
   scale_color_manual(breaks = c("Methylophilaceae", "Methylacidiphilaceae"), values = c("orange","hotpink1")) +
   annotation_custom(grid::textGrob(label = expression(bold("B")),
@@ -55,13 +55,13 @@ oct_20_methano <- ggplot() + geom_point(data = oct_2020, aes(x = Time, y = Methy
   geom_point(data = oct_2020, aes(x = Time, y = Methylocystaceae, color = "Methylocystaceae"))+
   geom_line(data = oct_2020, aes(x = Time, y = Methylocystaceae, color = "Methylocystaceae",linetype=Box)) +  
   labs(x="Time (Hours)", y="Relative Abundance", col = "Family", linetype = "Incubation Device",
-       title = expression(bold("October 2020")))+
+       title = expression(bold("October 2020")))+ ylim(c(0,0.0155)) +
   scale_color_manual(breaks = c("Methylomonadaceae", "Methylococcaceae", "Methylocystaceae"), values = c("purple4","blue","green3")) +
   guides(linetype = "none", color = "none") + geom_vline(xintercept = 13.6) +
   annotation_custom(grid::textGrob(label = expression(bold("A")),
                                    x = unit(0.94, "npc"), y = unit(0.95, "npc"), 
                                    gp = gpar(color = "black", fontsize=17))) +
-  scale_x_continuous(limits=c(0,35)) + scale_linetype_manual(breaks = c("1","2","3"), values=c(3,1,2)) +
+  scale_linetype_manual(breaks = c("1","2","3"), values=c(3,1,2)) +
   theme(axis.title.x = element_text(color = "white",size = rel(1.2)), 
         axis.line.y = element_line(color="black",),
         panel.background = element_rect(fill = "white", color = "white"), 
@@ -389,3 +389,4 @@ summer.graphs <- grid.arrange(june_1_methano, june_1_methylo,
 
 
 summer.all <- grid.arrange(summer.graphs,legends.all, nrow = 1, ncol = 2, widths=c(3.5,1))
+

@@ -13,7 +13,7 @@ library(scales)
 #############
 
 T0_qPCR <- read.csv(file = "qPCR_JL.csv", header = TRUE)
-Oct_2020_qPCR <- read.csv(file = "Mco_time_series_relative.csv", header = TRUE)
+Oct_2020_qPCR <- read.csv(file = "qPCR_Mco_time_series_relative.csv", header = TRUE)
 
 ##################
 ## Amplicon Data ##
@@ -57,11 +57,11 @@ season <- c("O","O","J","J","J","J","J","J","J","J","O","O")
 ############
 ## T0 Mco ##
 ############
-cor.test(T0_qPCR$Mco_Prop_Log10,Mco_subset,method="pearson",alternative = "two.sided")
+cor.test(T0_qPCR$Mco_Prop_Log10,Mco,method="pearson",alternative = "two.sided")
 # p = 4.36e-06, df = 10, t = 8.9479, r = 0.9428514, r^2 = 0.89
 
-plot(T0_qPCR$Mco_Prop_Log10,Mco_subset)
-qPCR_vs_amplicon_Mco <- ggplot()+geom_point(aes(y=10^T0_qPCR$Mco_Prop_Log10,x=10^Mco_subset),color="blue",size = 4.5) +
+plot(T0_qPCR$Mco_Prop_Log10,Mco)
+qPCR_vs_amplicon_Mco <- ggplot()+geom_point(aes(x=10^T0_qPCR$Mco_Prop_Log10,y=10^Mco),color="blue",size = 4.5) +
   scale_x_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
                      labels = trans_format("log10", math_format(10^.x))) + 
   scale_y_continuous(trans = "log10", breaks = trans_breaks("log10", function(x) 10^x),
@@ -75,7 +75,7 @@ qPCR_vs_amplicon_Mco <- ggplot()+geom_point(aes(y=10^T0_qPCR$Mco_Prop_Log10,x=10
   annotation_custom(grid::textGrob(label = expression(bold("C")),
                                    x = unit(0.055, "npc"), y = unit(0.96, "npc"), 
                                    gp = gpar(color = "black", fontsize=20))) +
-  geom_smooth(aes(y = 10^T0_qPCR$Mco_Prop_Log10, x = 10^(Mco_subset)), method = "lm", se=FALSE,
+  geom_smooth(aes(x = 10^T0_qPCR$Mco_Prop_Log10, y = 10^(Mco)), method = "lm", se=FALSE,
               color = "black", linewidth=0.4) +
   labs(x = expression(paste("    qPCR Relative Abundance\n          (pmoA gene copies\n/16S rRNA bacterial gene copies)")),
        y = "Amplicon Relative Abundance") + theme_classic() + 
@@ -88,34 +88,31 @@ qPCR_vs_amplicon_Mco <- ggplot()+geom_point(aes(y=10^T0_qPCR$Mco_Prop_Log10,x=10
 # Time Series #
 ###############
 
-cor.test(Oct_2020_qPCR$Avg_Mco_rel_abund,Mco_oct_2020)
-#t = 3.018, df = 13, p-value = 0.00989, r = 0.64, r^2 = 0.42
-
-#for displayed data
-cor.test(Oct_2020_qPCR$Avg_Mco_rel_abund[Oct_2020_qPCR$Time < 40],
-         Mco_oct_2020[Oct_2020_qPCR$Time < 40])
-#t = 3.2748, df = 11, p-value = 0.007402, r = 0.0.7026011, r^2 = 0.49
+#for above anoxic data
+cor.test(Oct_2020_qPCR$Avg_Mco_rel_abund[Oct_2020_qPCR$Time < 55],
+         Mco_oct_2020[Oct_2020_qPCR$Time < 55])
+#t = 3.018, df = 13, p-value = 0.00989, r = 0.6418635, r^2 = 0.41
 
 #######
 
-qPCR_plot_Mco <- ggplot()+geom_point(aes(x=Oct_2020_qPCR$Time[Oct_2020_qPCR$Time < 40],
-                                         y=Oct_2020_qPCR$Avg_Mco_rel_abund[Oct_2020_qPCR$Time < 40]),
+qPCR_plot_Mco <- ggplot()+geom_point(aes(x=Oct_2020_qPCR$Time[Oct_2020_qPCR$Time < 55],
+                                         y=Oct_2020_qPCR$Avg_Mco_rel_abund[Oct_2020_qPCR$Time < 55]),
                                      color = "blue") +
-  geom_line(aes(x=Oct_2020_qPCR$Time[Oct_2020_qPCR$Time < 40],
-                y=Oct_2020_qPCR$Avg_Mco_rel_abund[Oct_2020_qPCR$Time < 40],
-                linetype = as.character(Oct_2020_qPCR$Box[Oct_2020_qPCR$Time < 40])),
+  geom_line(aes(x=Oct_2020_qPCR$Time[Oct_2020_qPCR$Time < 55],
+                y=Oct_2020_qPCR$Avg_Mco_rel_abund[Oct_2020_qPCR$Time < 55],
+                linetype = as.character(Oct_2020_qPCR$Box[Oct_2020_qPCR$Time < 55])),
             color = "blue") + theme_classic() +
   labs(x="Time (Hours)", y = "   qPCR 
   Relative Abundance") +
   guides(linetype = guide_legend(title = "iBag Replicate No.")) 
 
 
-amplicon_plot_Mco <- ggplot() + geom_point(aes(x=Oct_2020_qPCR$Time[Oct_2020_qPCR$Time < 40],
-                                               y=Mco_oct_2020[Oct_2020_qPCR$Time < 40]),
+amplicon_plot_Mco <- ggplot() + geom_point(aes(x=Oct_2020_qPCR$Time[Oct_2020_qPCR$Time < 55],
+                                               y=Mco_oct_2020[Oct_2020_qPCR$Time < 55]),
                                            color = "blue") +
-  geom_line(aes(x=Oct_2020_qPCR$Time[Oct_2020_qPCR$Time < 40],
-                y=Mco_oct_2020[Oct_2020_qPCR$Time < 40],
-                linetype=as.character(Oct_2020_qPCR$Box[Oct_2020_qPCR$Time < 40])),
+  geom_line(aes(x=Oct_2020_qPCR$Time[Oct_2020_qPCR$Time < 55],
+                y=Mco_oct_2020[Oct_2020_qPCR$Time < 55],
+                linetype=as.character(Oct_2020_qPCR$Box[Oct_2020_qPCR$Time < 55])),
             color = "blue") + theme_classic() +
   labs(x="Time (Hours)", y = "   Amplicon 
   Relative Abundance") +
